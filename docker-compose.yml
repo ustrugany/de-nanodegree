@@ -1,0 +1,43 @@
+version: "3.7"
+services:
+  app:
+    image: jupyterhub/singleuser
+    volumes:
+      - ./notebooks:/home/jovyan
+    ports:
+      - 8888:8888
+  postgres:
+    image: postgres:12.2
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: test
+      POSTGRES_USER: test
+      POSTGRES_DB: test
+    volumes:
+      - ./data-postgres:/var/lib/postgresql/data
+  cassandra-node1:
+    image: cassandra:2.1.21
+    healthcheck:
+      test: ["CMD", "cqlsh", "-u cassandra", "-p cassandra" ,"-e describe keyspaces"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+    restart: always
+    environment:
+      - "MAX_HEAP_SIZE=256M"
+      - "HEAP_NEWSIZE=128M"
+#      - "CASSANDRA_SEEDS=db2-node2"
+    volumes:
+    - ./data-cassandra:/var/lib/cassandra
+    ports:
+      - "9042:9042"
+#  cassandra-node2:
+#    image: cassandra:2.1.21
+#    depends_on:
+#      - db2-node1
+#    environment:
+#      - "MAX_HEAP_SIZE=256M"
+#      - "HEAP_NEWSIZE=128M"
+#      - "CASSANDRA_SEEDS=db2-node1"
+#    volumes:
+#    - ./data2:/var/lib/cassandra
