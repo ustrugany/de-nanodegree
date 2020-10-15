@@ -1,0 +1,22 @@
+drop keyspace udacity;
+create keyspace udacity
+with replication = {'class': 'SimpleStrategy', 'replication_factor' : 1};
+
+drop table udacity.music_library;
+create table udacity.music_library (
+    album_id int,
+    album_name text,
+    artist_name text,
+    year int,
+    songs text[]
+    meta_created_tstamp timestamp,
+    primary key ((album_id, artist_name))
+);
+
+insert into projectx.message(album_id, album_name, artist_name, year, songs, meta_created_tstamp)
+values ('d0a16893-55f5-4fbc-b88f-ada87215c363', 'Let it be', 'Beatles', 1970, ['Let it be'], toTimeStamp(now())) USING TTL 600;
+
+select * from udacity.music_library limit 2;
+
+# SELECT * FROM udacity.music_library
+# WHERE TOKEN(album_id, artist_name) > TOKEN(0, 'Beatles') limit 2;
