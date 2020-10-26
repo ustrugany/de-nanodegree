@@ -1,0 +1,4 @@
+FROM jupyter/base-notebook:python-3.8.6
+
+ADD notebooks/requirements.txt .
+RUN pip install -r requirements.txt --no-cache-dir

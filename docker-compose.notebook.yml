@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  notebook:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.notebook
+    volumes:
+      - ./notebooks:/home/jovyan
+      - ./etl/scripts:/home/jovyan/scripts
+      - ./etl/data:/home/jovyan/data
+    ports:
+      - 8888:8888

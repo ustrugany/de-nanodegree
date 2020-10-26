@@ -1,11 +1,5 @@
 version: "3.7"
 services:
-  app:
-    image: jupyterhub/singleuser
-    volumes:
-      - ./notebooks:/home/jovyan
-    ports:
-      - 8888:8888
   postgres:
     image: postgres:12.2
     restart: always
@@ -15,6 +9,8 @@ services:
       POSTGRES_DB: udacity
     volumes:
       - ./tmp/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
   cassandra-node1:
     image: bitnami/cassandra:3.11.6
     ports:
