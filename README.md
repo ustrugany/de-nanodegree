@@ -1,3 +1,18 @@
+#### Project structure
+
+- `./etl/main.py` - ETL script
+- `./etl/requirements.txt` - Dependencies
+- `./etl/sql_queries.py` - Helper script with SQL Queries
+- `./etl/create_tables.py` - Tables setup script
+- `./etl/data/**` - Songs and playback logs data
+
+#### Running scripts
+**ETL**
+- install dependencies 
+```pip install -r requirements.txt --no-cache-dir```
+- run the script
+```python main.py```
+
 #### Discuss the purpose of this database in the context of the startup, Sparkify, and their analytical goals.
 Designed database provides for central data source for information otherwise available 
 in semi-structured format: users interactions with application, enriched with songs and artists information. 

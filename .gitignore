@@ -3,3 +3,5 @@ venv
 notebooks/.*
 tmp*
 .DS_Store
+**__pycache__**
+.run
