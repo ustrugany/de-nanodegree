@@ -7,11 +7,14 @@
 - `./etl/data/**` - Songs and playback logs data
 
 #### Running scripts
-**ETL**
-- install dependencies 
-```pip install -r requirements.txt --no-cache-dir```
-- run the script
-```python main.py```
+##### Prerequisites
+- start backing db services ```docker-compose -f docker-compose.services.yml up -d```
+
+##### Creating tables schemas
+- ```docker-compose -f docker-compose.etl.yml run etl python create_tables.py```
+
+##### Running ETL
+- ```docker-compose -f docker-compose.etl.yml up```
 
 #### Discuss the purpose of this database in the context of the startup, Sparkify, and their analytical goals.
 Designed database provides for central data source for information otherwise available 
